@@ -1,0 +1,27 @@
+services:
+  markdown-redirect-server:
+    container_name: "markdown-redirect-server"
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8079:8080"
+    volumes:
+      - .:/app
+    environment:
+      - GIN_MODE=debug
+    # command: go run main.go  # Assumes your main file is named main.go
+
+  # If you need a database, you can uncomment and configure this service
+  # db:
+  #   image: postgres:13
+  #   environment:
+  #     - POSTGRES_DB=myapp
+  #     - POSTGRES_USER=user
+  #     - POSTGRES_PASSWORD=password
+  #   volumes:
+  #     - postgres_data:/var/lib/postgresql/data
+
+# Uncomment if using a database
+# volumes:
+#   postgres_data:
