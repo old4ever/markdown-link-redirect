@@ -30,9 +30,9 @@ func main() {
 	// 	}
 	// })
 
-	r.GET("/", func(ctx *gin.Context) {
-		ctx.String(http.StatusNoContent, "send hash to /magnet-redirect?hash=")
-	})
+	// r.GET("/", func(ctx *gin.Context) {
+	// 	ctx.String(http.StatusNoContent, "send hash to /magnet-redirect?hash=")
+	// })
 
 	r.GET("/magnet-redirect", func(ctx *gin.Context) {
 		hash := ctx.Query("hash")
@@ -45,5 +45,5 @@ func main() {
 	})
 
 	// r.Run(":80")
-	r.Run()
+	r.Run(":8080")
 }
