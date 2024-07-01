@@ -6,9 +6,19 @@ import (
 
 	"github.com/aviddiviner/gin-limit"
 	"github.com/gin-gonic/gin"
+	"github.com/joho/godotenv"
+	"log"
+	"os"
 )
 
 func main() {
+
+	if err := godotenv.Load(); err != nil {
+		log.Println("No .env file found")
+	}
+
+	GIN_MODE := os.Getenv("GIN_MODE")
+
 	r := gin.Default()
 	r.Use(limit.MaxAllowed(1))
 	r.SetTrustedProxies(nil)
@@ -23,9 +33,9 @@ func main() {
 		}
 	})
 
-	// if gin.Mode() == "debug" {
-	// 	r.Run(":443")
-	// } else {
-	r.RunTLS(":443", "/etc/letsencrypt/live/magnet.dmytros.dev/fullchain.pem", "/etc/letsencrypt/live/magnet.dmytros.dev/privkey.pem")
-	// }
+	if GIN_MODE == "debug" {
+		r.Run(":443")
+	} else {
+		r.RunTLS(":443", "/etc/letsencrypt/live/magnet.dmytros.dev/fullchain.pem", "/etc/letsencrypt/live/magnet.dmytros.dev/privkey.pem")
+	}
 }

@@ -11,8 +11,7 @@ services:
       - .:/app
       - /etc/letsencrypt:/etc/letsencrypt:ro
     environment:
-      - GIN_MODE=debug
-      # - GIN_MODE=release
+      - GIN_MODE=$GIN_MODE
 
   # If you need a database, you can uncomment and configure this service
   # db:
