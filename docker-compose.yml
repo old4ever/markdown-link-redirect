@@ -10,6 +10,7 @@ services:
     volumes:
       - .:/app
       - /etc/letsencrypt:/etc/letsencrypt:ro
+      - $HOME/markdown-link-redirect/gin_blocked.log:/var/log/gin_blocked.log
     environment:
       - GIN_MODE=$GIN_MODE
 
