@@ -12,7 +12,7 @@ services:
       - /etc/letsencrypt:/etc/letsencrypt:ro
     environment:
       - GIN_MODE=debug
-    # command: go run main.go  # Assumes your main file is named main.go
+      # - GIN_MODE=release
 
   # If you need a database, you can uncomment and configure this service
   # db:
