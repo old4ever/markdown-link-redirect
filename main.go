@@ -2,7 +2,7 @@ package main
 
 import (
 	"fmt"
-	"log"
+	// "log"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
@@ -34,11 +34,11 @@ func main() {
 	// r.GET("/", func(ctx *gin.Context) {
 	// 	ctx.String(http.StatusNoContent, "send hash to /magnet-redirect?hash=")
 	// })
-	go func() {
-		http.ListenAndServe(":80", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-			http.Redirect(w, r, "https://"+r.Host+r.RequestURI, http.StatusMovedPermanently)
-		}))
-	}()
+	// go func() {
+	// 	http.ListenAndServe(":80", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+	// 		http.Redirect(w, r, "https://"+r.Host+r.RequestURI, http.StatusMovedPermanently)
+	// 	}))
+	// }()
 
 	r.GET("/magnet-redirect", func(ctx *gin.Context) {
 		hash := ctx.Query("hash")
@@ -50,8 +50,9 @@ func main() {
 		}
 	})
 
-	err := r.RunTLS(":443", "/etc/letsencrypt/live/magnet.dmytros.dev/fullchain.pem", "/etc/letsencrypt/live/magnet.dmytros.dev/privkey.pem")
-	if err != nil {
-		log.Fatal(err)
-	}
+	// err := r.RunTLS(":443", "/etc/letsencrypt/live/magnet.dmytros.dev/fullchain.pem", "/etc/letsencrypt/live/magnet.dmytros.dev/privkey.pem")
+	// if err != nil {
+	// 	log.Fatal(err)
+	// }
+	r.Run(":80")
 }
