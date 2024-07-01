@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+touch gin_blocked.log
+
 cp ./gin-jail.conf /etc/fail2ban/jail.d/
 cp ./gin-app.conf /etc/fail2ban/filter.d/
 ln -s /etc/fail2ban/jail.d/gin-jail.conf "$(pwd)/gin-jail-link.conf"
