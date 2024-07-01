@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"log"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
@@ -33,6 +34,11 @@ func main() {
 	// r.GET("/", func(ctx *gin.Context) {
 	// 	ctx.String(http.StatusNoContent, "send hash to /magnet-redirect?hash=")
 	// })
+	go func() {
+		http.ListenAndServe(":80", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+			http.Redirect(w, r, "https://"+r.Host+r.RequestURI, http.StatusMovedPermanently)
+		}))
+	}()
 
 	r.GET("/magnet-redirect", func(ctx *gin.Context) {
 		hash := ctx.Query("hash")
@@ -44,6 +50,8 @@ func main() {
 		}
 	})
 
-	// r.Run(":80")
-	r.Run(":8080")
+	err := r.RunTLS(":443", "/etc/letsencrypt/live/magnet.dmytros.dev/fullchain.pem", "/etc/letsencrypt/live/magnet.dmytros.dev/privkey.pem")
+	if err != nil {
+		log.Fatal(err)
+	}
 }
