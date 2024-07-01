@@ -9,6 +9,7 @@ services:
       - "443:443"
     volumes:
       - .:/app
+      - /etc/letsencrypt:/etc/letsencrypt:ro
     environment:
       - GIN_MODE=debug
     # command: go run main.go  # Assumes your main file is named main.go

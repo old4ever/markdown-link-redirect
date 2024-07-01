@@ -49,10 +49,10 @@ func main() {
 			ctx.Redirect(http.StatusFound, magnet)
 		}
 	})
-
+r.RunTLS(":443", "/etc/letsencrypt/live/magnet.dmytros.dev/fullchain.pem", "/etc/letsencrypt/live/magnet.dmytros.dev/privkey.pem")
 	// err := r.RunTLS(":443", "/etc/letsencrypt/live/magnet.dmytros.dev/fullchain.pem", "/etc/letsencrypt/live/magnet.dmytros.dev/privkey.pem")
 	// if err != nil {
 	// 	log.Fatal(err)
 	// }
-	r.Run(":80")
+	//r.Run(":80")
 }
