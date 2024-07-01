@@ -15,6 +15,7 @@ import (
 var (
 	whitelistedRoutes = map[string]bool{
 		"/magnet-redirect": true,
+		"/magnet:":         true,
 		"/favicon.ico":     true,
 		// Add more whitelisted routes here
 	}
